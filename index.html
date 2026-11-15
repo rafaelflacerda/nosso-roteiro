@@ -1,11 +1,689 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Teste</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Luna e Rafael</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap">
+<style>
+  :root {
+    --tinta: #3c3333;
+    --papel: #fefdfb;
+    --verde: #e9eee6;
+    --borda: #b9b2ab;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--papel);
+    color: var(--tinta);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 20px;
+    line-height: 1.4;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* Folhagem fixa na lateral esquerda, atrás do conteúdo */
+  .folha {
+    position: fixed;
+    left: -78px;
+    top: 0;
+    height: 100vh;
+    height: 100dvh;
+    opacity: 0.35;
+    pointer-events: none;
+  }
+
+  /* Cada tela é uma coluna centralizada */
+  .tela {
+    position: relative;
+    max-width: 400px;
+    min-height: 100vh;
+    min-height: 100dvh;
+    margin: 0 auto;
+    padding: calc(env(safe-area-inset-top) + 40px) 36px calc(env(safe-area-inset-bottom) + 36px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    text-align: center;
+  }
+  .tela[hidden] { display: none; }
+
+  h1 {
+    margin: 0;
+    font-weight: 400;
+    font-size: 32px;
+    font-variant: small-caps;
+    letter-spacing: 0.06em;
+    line-height: 1.15;
+  }
+  h2 { margin: 0; font-weight: 400; font-size: 30px; line-height: 1.2; }
+  p { margin: 0; }
+
+  .versal { font-size: 14px; letter-spacing: 0.32em; text-transform: uppercase; }
+  .italico { font-style: italic; }
+  .linha { width: 84px; height: 1px; background: var(--tinta); opacity: 0.55; }
+  .empurra { margin-top: auto; }
+
+  .nomes { font-size: 15px; letter-spacing: 0.42em; text-transform: uppercase; }
+  .nomes i { font-size: 19px; letter-spacing: 0.02em; text-transform: none; }
+
+  .mensagem { display: flex; flex-direction: column; gap: 12px; font-size: 19px; }
+
+  .logo-grande { width: 128px; height: 128px; }
+  .logo-pequena { width: 48px; height: 48px; }
+
+  a { color: var(--tinta); text-decoration: none; }
+  .menu { display: flex; flex-direction: column; align-items: center; }
+  .menu a { min-height: 44px; }
+  .voltar-inicio { flex-direction: column; gap: 6px; }
+  .menu a, .voltar-inicio, .atalho {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 20px;
+  }
+  .voltar-inicio { min-height: 52px; }
+  .atalho { min-height: 44px; font-size: 12px; }
+
+  button {
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+    border-radius: 2px;
+    -webkit-tap-highlight-color: transparent;
+  }
+  a:focus-visible, button:focus-visible { outline: 1px solid var(--tinta); outline-offset: 3px; }
+
+  /* Caixinhas de resposta e de filme */
+  .opcoes { list-style: none; margin: 0; padding: 0; width: 100%; display: flex; flex-direction: column; gap: 14px; }
+  .caixa {
+    width: 100%;
+    min-height: 64px;
+    padding: 12px 18px;
+    background: rgba(254, 253, 251, 0.86);
+    border: 1px solid var(--borda);
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .caixa[aria-pressed="true"] { background: var(--verde); border-color: var(--tinta); }
+  .caixa small { display: block; font-size: 16px; font-style: italic; }
+
+  .rodape { width: 100%; min-height: 52px; display: flex; justify-content: space-between; align-items: center; }
+  .botao-texto { min-height: 52px; padding: 0 8px; background: none; border: none; }
+  .botao-cheio { min-height: 52px; padding: 0 22px; background: var(--tinta); color: var(--papel); border: none; }
+
+  .plano { list-style: none; margin: 0; padding: 0; width: 100%; display: flex; flex-direction: column; gap: 22px; }
+  .plano strong { display: block; font-weight: 400; font-size: 23px; line-height: 1.2; }
+
+  /* Ordenação e filtros da lista de filmes */
+  .filtros { width: 100%; display: flex; flex-direction: column; gap: 12px; text-align: left; }
+  .filtros label { display: flex; flex-direction: column; gap: 4px; }
+  .filtros select {
+    width: 100%;
+    min-height: 48px;
+    padding: 0 12px;
+    font: inherit;
+    color: inherit;
+    background: rgba(254, 253, 251, 0.86);
+    border: 1px solid var(--borda);
+    border-radius: 2px;
+  }
+
+  /* Filtros: gavetas que abrem ao toque, com fichas que podem ser marcadas várias de uma vez */
+  .gaveta { background: rgba(254, 253, 251, 0.86); border: 1px solid var(--borda); border-radius: 2px; }
+  .gaveta summary { min-height: 48px; padding: 0 12px; display: flex; align-items: center; cursor: pointer; list-style: none; }
+  .gaveta summary::-webkit-details-marker { display: none; }
+  .fichas { display: flex; flex-wrap: wrap; gap: 8px; padding: 0 12px 12px; }
+  .ficha { min-height: 44px; padding: 0 14px; background: none; border: 1px solid var(--borda); font-size: 17px; }
+  .ficha[aria-pressed="true"] { background: var(--verde); border-color: var(--tinta); }
+
+  /* Filme e exposição: caixinha que abre ao toque */
+  .cartao { width: 100%; background: rgba(254, 253, 251, 0.86); border: 1px solid var(--borda); border-radius: 2px; }
+  .cartao.marcado { background: var(--verde); border-color: var(--tinta); }
+  .cartao summary { min-height: 64px; padding: 12px 18px; display: flex; flex-direction: column; justify-content: center; cursor: pointer; list-style: none; }
+  .cartao summary::-webkit-details-marker { display: none; }
+  .cartao small { font-size: 13px; letter-spacing: 0.2em; text-transform: uppercase; }
+  .cartao .dentro { padding: 0 18px 12px; display: flex; flex-direction: column; align-items: center; gap: 12px; font-size: 18px; }
+  .cartao img { width: 160px; height: auto; }
+  .cartao img.larga { width: 100%; }
+
+  .credito { font-size: 14px; }
+
+  /* Telas largas (tablet): a folhagem aparece inteira, como na arte original */
+  @media (min-width: 700px) {
+    .folha { left: 0; opacity: 0.85; }
+    /* a folhagem tem 26,25% da altura da tela como largura; o conteúdo começa depois dela */
+    body { padding-left: 26.25vh; font-size: 22px; }
+    /* coluna mais larga e letra maior, para aproveitar a tela do tablet */
+    .tela { max-width: 520px; }
+  }
+</style>
 </head>
 <body>
-  <p>Funcionando.</p>
+
+<img class="folha" src="folha.jpg" alt="" aria-hidden="true">
+
+<!-- TELA INICIAL -->
+<section class="tela" id="tela-inicio">
+  <img class="logo-grande" src="logo.svg" alt="Logo L e R com flechas cruzadas">
+  <p class="nomes">Luna <i>and</i> Rafael</p>
+  <h1>Uma tarde em São Paulo</h1>
+  <p class="versal">15/11/2026 | 15:00</p>
+  <div class="linha"></div>
+  <div class="mensagem italico">
+    <p>Meu amor,</p>
+    <p>Fiz este cantinho de brincadeira, com algumas ideias do que a gente pode fazer hoje. A regra é uma só: quem decide é você. Vale estudar, vale ficar de bobeira em casa, vale sair por aí.</p>
+    <p>Hoje você chega em São Paulo para continuar a temporada de provas, e eu queria que fosse um dia bom e especial, seja qual for o plano. Até porque, com você, qualquer plano já é bom.</p>
+    <p>E não é todo dia que se completam 5 anos, 5 meses e 24 dias de namoro. Vamos comemorar.</p>
+    <p>Amo muito você.</p>
+  </div>
+  <div class="linha"></div>
+  <nav class="menu empurra">
+    <a class="versal" href="#roteiro">Montar nosso roteiro</a>
+    <a class="versal" href="#filmes">Lista de filmes</a>
+    <a class="versal" href="#cartaz">Em cartaz no cinema</a>
+    <a class="versal" href="#exposicoes">Exposições de arte</a>
+    <a class="versal" href="#cafeterias">Cafeterias</a>
+    <a class="versal" href="#bares">Bares</a>
+    <a class="versal" href="#restaurantes">Restaurantes</a>
+  </nav>
+</section>
+
+<!-- MONTAGEM DE ROTEIRO (o conteúdo é desenhado pelo script) -->
+<section class="tela" id="tela-roteiro" hidden>
+  <a class="voltar-inicio versal" href="#inicio"><img class="logo-pequena" src="logo.svg" alt="">Voltar ao início</a>
+  <div id="roteiro" style="display: contents"></div>
+</section>
+
+<!-- LISTA DE FILMES -->
+<section class="tela" id="tela-filmes" hidden>
+  <a class="voltar-inicio versal" href="#inicio"><img class="logo-pequena" src="logo.svg" alt="">Voltar ao início</a>
+  <h1>Lista de filmes</h1>
+  <p class="italico">Toque em um filme para saber mais.</p>
+  <div class="filtros">
+    <label><span class="versal">Ordenar</span>
+      <select id="ordem">
+        <option value="nome-az">Nome, de A a Z</option>
+        <option value="nome-za">Nome, de Z a A</option>
+        <option value="ano-antigos">Ano, antigos primeiro</option>
+        <option value="ano-novos">Ano, novos primeiro</option>
+      </select>
+    </label>
+    <details class="gaveta">
+      <summary class="versal" id="resumo-pais">País</summary>
+      <div class="fichas" id="fichas-pais"></div>
+    </details>
+    <details class="gaveta">
+      <summary class="versal" id="resumo-decada">Década</summary>
+      <div class="fichas" id="fichas-decada"></div>
+    </details>
+    <button class="botao-texto versal" id="limpar" hidden>Limpar filtros</button>
+  </div>
+  <p class="versal" id="contagem"></p>
+  <ul class="opcoes" id="filmes"></ul>
+  <p class="credito italico">Dados e imagens dos filmes: TMDB.</p>
+</section>
+
+<!-- FILMES EM CARTAZ NO CINEMA -->
+<section class="tela" id="tela-cartaz" hidden>
+  <a class="voltar-inicio versal" href="#inicio"><img class="logo-pequena" src="logo.svg" alt="">Voltar ao início</a>
+  <h1>Em cartaz no cinema</h1>
+  <p class="italico">Toque em um filme para saber mais.</p>
+  <div class="linha"></div>
+  <ul class="opcoes" id="cartaz"></ul>
+  <p class="credito italico">Dados e imagens dos filmes: TMDB.</p>
+</section>
+
+<!-- EXPOSIÇÕES DE ARTE -->
+<section class="tela" id="tela-exposicoes" hidden>
+  <a class="voltar-inicio versal" href="#inicio"><img class="logo-pequena" src="logo.svg" alt="">Voltar ao início</a>
+  <h1>Exposições de arte</h1>
+  <div class="linha"></div>
+  <div id="exposicoes" style="display: contents"></div>
+</section>
+
+<!-- CAFETERIAS -->
+<section class="tela" id="tela-cafeterias" hidden>
+  <a class="voltar-inicio versal" href="#inicio"><img class="logo-pequena" src="logo.svg" alt="">Voltar ao início</a>
+  <h1>Cafeterias</h1>
+  <div class="linha"></div>
+  <div id="cafeterias" style="display: contents"></div>
+</section>
+
+<!-- BARES -->
+<section class="tela" id="tela-bares" hidden>
+  <a class="voltar-inicio versal" href="#inicio"><img class="logo-pequena" src="logo.svg" alt="">Voltar ao início</a>
+  <h1>Bares</h1>
+  <div class="linha"></div>
+  <div id="bares" style="display: contents"></div>
+</section>
+
+<!-- RESTAURANTES -->
+<section class="tela" id="tela-restaurantes" hidden>
+  <a class="voltar-inicio versal" href="#inicio"><img class="logo-pequena" src="logo.svg" alt="">Voltar ao início</a>
+  <h1>Restaurantes</h1>
+  <div class="linha"></div>
+  <div class="filtros" id="filtros-restaurantes">
+    <label><span class="versal">Ordenar</span>
+      <select id="ordem-restaurantes">
+        <option value="cozinha">Por tipo de cozinha</option>
+        <option value="az">Nome, de A a Z</option>
+        <option value="za">Nome, de Z a A</option>
+      </select>
+    </label>
+    <details class="gaveta">
+      <summary class="versal" id="resumo-cozinha">Tipo de cozinha</summary>
+      <div class="fichas" id="fichas-cozinha"></div>
+    </details>
+  </div>
+  <p class="versal" id="contagem-restaurantes"></p>
+  <div id="restaurantes" style="display: contents"></div>
+</section>
+
+<script>
+// ---------- CONTEÚDO (é aqui que você edita os textos) ----------
+
+// Árvore do roteiro. Cada pergunta tem:
+//   titulo:   o texto principal da tela
+//   mensagem: (opcional) um recado seu que aparece acima do título
+//   multipla: (opcional) true permite marcar mais de uma opção; nesse caso
+//             a próxima tela é definida em "proxima" da própria pergunta
+// Cada opção tem:
+//   proxima: nome da próxima pergunta, ou null para encerrar e mostrar o roteiro
+//   plano:   itens que essa escolha acrescenta ao roteiro final
+//            (um item com link mostra um atalho para aquela lista; textoLink é o texto do atalho)
+const QUARTO = { quando: 'Agora', titulo: 'Vamos pro quarto um pouquinho 😏😏' };
+
+const QUALITY_TIME = [
+  { texto: 'Assistir uma comédia romântica do jeito que você adora', plano: [{ quando: 'Quality time', titulo: 'Uma comédia romântica do jeito que você adora', detalhe: 'A gente escolhe na lista de filmes', link: '#filmes' }] },
+  { texto: 'Jogar algum jogo', plano: [{ quando: 'Quality time', titulo: 'Jogar algum jogo' }] },
+  { texto: 'Fazer cookies (achei uma receita deliciosa)', plano: [{ quando: 'Quality time', titulo: 'Fazer cookies', detalhe: 'Achei uma receita deliciosa' }] },
+  { texto: 'Cozinhar alguma coisa diferente', plano: [{ quando: 'Quality time', titulo: 'Cozinhar alguma coisa diferente' }] }
+];
+
+const PERGUNTAS = {
+  inicio: {
+    titulo: 'Quer ficar de bobeira ou quer estudar?',
+    opcoes: [
+      { texto: 'Ficar de bobeira', proxima: 'bobeira', plano: [] },
+      { texto: 'Estudar', proxima: 'lanche', plano: [] }
+    ]
+  },
+
+  // ----- caminho: bobeira -----
+  bobeira: {
+    titulo: 'De bobeira em casa ou sair e fazer alguma coisa?',
+    opcoes: [
+      { texto: 'Ficar em casa', proxima: 'casa', plano: [] },
+      { texto: 'Sair e fazer alguma coisa', proxima: 'sair', plano: [] }
+    ]
+  },
+  casa: {
+    titulo: 'E em casa, o que você quer?',
+    opcoes: [
+      { texto: 'Vamos pro quarto um pouquinho?? 😏😏', proxima: null, plano: [QUARTO] },
+      { texto: 'Queria um pouco de quality time', proxima: 'quality', plano: [] },
+      { texto: 'Por que não as duas anteriores? (you will not regret it)', proxima: 'qualityComRecado', plano: [QUARTO] }
+    ]
+  },
+  quality: {
+    titulo: 'Quality time juntos',
+    multipla: true,
+    proxima: null,
+    opcoes: QUALITY_TIME
+  },
+  qualityComRecado: {
+    mensagem: 'Você fez uma boa escolha 😈😈',
+    titulo: 'Quality time juntos',
+    multipla: true,
+    proxima: null,
+    opcoes: QUALITY_TIME
+  },
+  sair: {
+    titulo: 'O que você quer fazer?',
+    opcoes: [
+      { texto: 'Ir a uma exposição de arte (tenho indicações)', proxima: null, plano: [{ quando: 'Agora', titulo: 'Uma exposição de arte', detalhe: 'Tenho indicações', link: '#exposicoes', textoLink: 'Ver as exposições' }] },
+      { texto: 'Ir ao cinema', proxima: null, plano: [{ quando: 'Agora', titulo: 'Cinema', link: '#cartaz', textoLink: 'Ver os filmes em cartaz' }] },
+      { texto: 'Tomar um café', proxima: null, plano: [{ quando: 'Agora', titulo: 'Um café', link: '#cafeterias', textoLink: 'Ver as cafeterias' }] },
+      { texto: 'Sair para um barzinho', proxima: null, plano: [{ quando: 'Agora', titulo: 'Um barzinho', link: '#bares', textoLink: 'Ver os bares' }] },
+      { texto: 'Sair para um restaurante', proxima: null, plano: [{ quando: 'Agora', titulo: 'Um restaurante', link: '#restaurantes', textoLink: 'Ver os restaurantes' }] }
+    ]
+  },
+
+  // ----- caminho: estudar -----
+  lanche: {
+    titulo: 'Primeiro, um lanche delicioso',
+    mensagem: 'Café com leite do jeito que você gosta e mini sanduíches, como avotoast.',
+    opcoes: [
+      { texto: 'Quero', proxima: 'jantar', plano: [{ quando: 'Primeiro', titulo: 'Um lanche em casa', detalhe: 'Café com leite do jeito que você gosta e mini sanduíches' }, { quando: 'Depois', titulo: 'Estudar' }] }
+    ]
+  },
+  jantar: {
+    titulo: 'Quer jantar mais tarde?',
+    opcoes: [
+      { texto: 'Quero', proxima: 'filme', plano: [{ quando: 'Mais tarde', titulo: 'Jantar' }] },
+      { texto: 'Hoje não', proxima: 'filme', plano: [] }
+    ]
+  },
+  filme: {
+    mensagem: 'São muitas opções, então o filme a gente escolhe depois, na lista de filmes.',
+    titulo: 'Quer assistir um filme mais tarde?',
+    opcoes: [
+      { texto: 'Quero', proxima: null, plano: [{ quando: 'Pra fechar', titulo: 'Um filme', detalhe: 'A gente escolhe na lista de filmes', link: '#filmes' }] },
+      { texto: 'Hoje não', proxima: null, plano: [] }
+    ]
+  }
+};
+
+// ---------- NAVEGAÇÃO ENTRE AS TELAS ----------
+
+// Os links internos (#inicio, #roteiro, #filmes, #exposicoes) trocam a tela
+// direto, sem depender do endereço da página. Ao abrir, vale a tela inicial.
+function mostrarTela(nome) {
+  document.querySelectorAll('.tela').forEach(tela => { tela.hidden = tela.id !== 'tela-' + nome; });
+  window.scrollTo(0, 0);
+}
+
+document.addEventListener('click', evento => {
+  const link = evento.target.closest('a[href^="#"]');
+  if (!link) return;
+  evento.preventDefault();
+  mostrarTela(link.getAttribute('href').slice(1));
+});
+
+// ---------- ROTEIRO ----------
+
+// caminho: escolhas já confirmadas, em ordem (cada uma com "proxima" e "plano").
+// marcadas: índices das opções tocadas na pergunta atual.
+let caminho = [];
+let marcadas = [];
+let terminou = false;
+
+function perguntaAtual() {
+  const ultima = caminho[caminho.length - 1];
+  return PERGUNTAS[ultima ? ultima.proxima : 'inicio'];
+}
+
+// Junta as opções marcadas em uma única escolha.
+function escolhaAtual() {
+  const pergunta = perguntaAtual();
+  const opcoes = marcadas.map(i => pergunta.opcoes[i]);
+  return {
+    proxima: pergunta.multipla ? pergunta.proxima : opcoes[0].proxima,
+    plano: opcoes.flatMap(opcao => opcao.plano)
+  };
+}
+
+function desenharRoteiro() {
+  const area = document.getElementById('roteiro');
+
+  if (terminou) {
+    const itens = caminho.flatMap(escolha => escolha.plano);
+    area.innerHTML = `
+      <h1>Nosso roteiro</h1>
+      <div class="linha"></div>
+      <ol class="plano">
+        ${itens.map(item => `
+          <li>
+            <span class="versal">${item.quando}</span>
+            <strong>${item.titulo}</strong>
+            ${item.detalhe ? `<span class="italico">${item.detalhe}</span>` : ''}
+            ${item.link ? `<a class="versal atalho" href="${item.link}">${item.textoLink || 'Abrir a lista de filmes'}</a>` : ''}
+          </li>`).join('')}
+      </ol>
+      <button class="botao-texto versal empurra" data-acao="refazer">Refazer as respostas</button>`;
+    return;
+  }
+
+  const pergunta = perguntaAtual();
+  area.innerHTML = `
+    ${pergunta.mensagem ? `<p class="italico">${pergunta.mensagem}</p><div class="linha"></div>` : ''}
+    <h2>${pergunta.titulo}</h2>
+    ${pergunta.multipla ? '<p class="versal">Pode escolher mais de uma</p>' : ''}
+    <ul class="opcoes">
+      ${pergunta.opcoes.map((opcao, i) => `
+        <li><button class="caixa" data-opcao="${i}" aria-pressed="${marcadas.includes(i)}">${opcao.texto}</button></li>`).join('')}
+    </ul>
+    <div class="rodape empurra">
+      ${caminho.length ? '<button class="botao-texto versal" data-acao="voltar">Voltar</button>' : '<span></span>'}
+      ${marcadas.length ? `<button class="botao-cheio versal" data-acao="avancar">${escolhaAtual().proxima ? 'Continuar' : 'Ver roteiro'}</button>` : ''}
+    </div>`;
+}
+
+document.getElementById('roteiro').addEventListener('click', evento => {
+  const botao = evento.target.closest('button');
+  if (!botao) return;
+
+  if (botao.dataset.opcao !== undefined) {
+    const i = Number(botao.dataset.opcao);
+    if (!perguntaAtual().multipla) marcadas = [i];
+    else if (marcadas.includes(i)) marcadas = marcadas.filter(m => m !== i);
+    else marcadas.push(i);
+  } else if (botao.dataset.acao === 'avancar') {
+    const escolha = escolhaAtual();
+    caminho.push(escolha);
+    terminou = !escolha.proxima;
+    marcadas = [];
+  } else if (botao.dataset.acao === 'voltar') {
+    caminho.pop();
+    marcadas = [];
+  } else if (botao.dataset.acao === 'refazer') {
+    caminho = [];
+    marcadas = [];
+    terminou = false;
+  }
+  desenharRoteiro();
+});
+
+// ---------- FILMES ----------
+
+// As duas listas vêm de arquivos gerados pelo buscar_filmes.py:
+// filmes.json (a nossa lista) e cartaz.json (em cartaz no cinema).
+const LISTAS = { filmes: [], cartaz: [] };
+const filtros = { pais: new Set(), decada: new Set() };   // fichas marcadas em cada filtro
+
+// "Reino Unido / EUA" ou "Índia (coprodução com EUA, Itália e França)" -> lista de países
+function paisesDe(filme) {
+  return filme.paises.replace('(coprodução com', '/').replace(')', '')
+    .split(/ \/ |, | e /).map(pais => pais.trim()).filter(Boolean);
+}
+
+function decadaDe(filme) {
+  return Math.floor(filme.ano / 10) * 10;
+}
+
+const ORDENS = {
+  'nome-az': (a, b) => a.titulo.localeCompare(b.titulo, 'pt'),
+  'nome-za': (a, b) => b.titulo.localeCompare(a.titulo, 'pt'),
+  'ano-antigos': (a, b) => a.ano - b.ano,
+  'ano-novos': (a, b) => b.ano - a.ano
+};
+
+// Monta as fichas dos filtros a partir dos países e décadas que existem na lista.
+function preencherFiltros() {
+  const paises = [...new Set(LISTAS.filmes.flatMap(paisesDe))].sort((a, b) => a.localeCompare(b, 'pt'));
+  const decadas = [...new Set(LISTAS.filmes.map(decadaDe))].sort();
+  const ficha = (grupo, valor, texto) =>
+    `<button class="ficha" data-grupo="${grupo}" data-valor="${valor}" aria-pressed="false">${texto}</button>`;
+  document.getElementById('fichas-pais').innerHTML = paises.map(pais => ficha('pais', pais, pais)).join('');
+  document.getElementById('fichas-decada').innerHTML = decadas.map(decada => ficha('decada', decada, 'Anos ' + decada)).join('');
+}
+
+function desenharFilmes() {
+  // Dentro de um filtro vale "um ou outro" (EUA ou França);
+  // entre os dois filtros vale "e" (o país marcado e a década marcada).
+  const visiveis = LISTAS.filmes
+    .filter(filme => !filtros.pais.size || paisesDe(filme).some(pais => filtros.pais.has(pais)))
+    .filter(filme => !filtros.decada.size || filtros.decada.has(String(decadaDe(filme))))
+    .sort(ORDENS[document.getElementById('ordem').value]);
+
+  const comContagem = (texto, quantos) => texto + (quantos ? ` (${quantos})` : '');
+  document.getElementById('resumo-pais').textContent = comContagem('País', filtros.pais.size);
+  document.getElementById('resumo-decada').textContent = comContagem('Década', filtros.decada.size);
+  document.getElementById('limpar').hidden = !filtros.pais.size && !filtros.decada.size;
+
+  document.getElementById('contagem').textContent = visiveis.length + (visiveis.length === 1 ? ' filme' : ' filmes');
+  document.getElementById('filmes').innerHTML = visiveis.map(filme => cartaoDeFilme('filmes', filme)).join('');
+}
+
+// Caixinha de um filme: fechada mostra título, ano e país; aberta mostra o resto.
+function cartaoDeFilme(lista, filme) {
+  const detalhes = [filme.ano, filme.paises].filter(Boolean).join(' | ');
+  return `
+    <li><details class="cartao ${filme.marcado ? 'marcado' : ''}">
+      <summary>${filme.titulo}<small>${detalhes}</small></summary>
+      <div class="dentro">
+        ${filme.poster ? `<img src="${filme.poster}" alt="Pôster de ${filme.titulo}" loading="lazy">` : ''}
+        ${filme.original && filme.original !== filme.titulo ? `<p class="italico">${filme.original}</p>` : ''}
+        ${filme.elenco && filme.elenco.length ? `<p>Com ${filme.elenco.join(', ')}</p>` : ''}
+        ${filme.sinopse ? `<p>${filme.sinopse}</p>` : ''}
+        <button class="botao-texto versal" data-lista="${lista}" data-posicao="${LISTAS[lista].indexOf(filme)}">${filme.marcado ? 'Marcado' : 'Quero ver'}</button>
+      </div>
+    </details></li>`;
+}
+
+document.getElementById('ordem').addEventListener('change', desenharFilmes);
+
+// Toque em uma ficha marca ou desmarca; "Limpar filtros" desmarca todas.
+document.querySelector('.filtros').addEventListener('click', evento => {
+  const ficha = evento.target.closest('.ficha');
+  if (ficha) {
+    const marcadas = filtros[ficha.dataset.grupo];
+    const marcar = !marcadas.has(ficha.dataset.valor);
+    if (marcar) marcadas.add(ficha.dataset.valor); else marcadas.delete(ficha.dataset.valor);
+    ficha.setAttribute('aria-pressed', marcar);
+  } else if (evento.target.id === 'limpar') {
+    filtros.pais.clear();
+    filtros.decada.clear();
+    document.querySelectorAll('#tela-filmes .ficha').forEach(outra => outra.setAttribute('aria-pressed', 'false'));
+  } else {
+    return;
+  }
+  desenharFilmes();
+});
+
+// "Quero ver": vale para as duas listas de filmes.
+document.addEventListener('click', evento => {
+  const botao = evento.target.closest('button[data-lista]');
+  if (!botao) return;
+  const filme = LISTAS[botao.dataset.lista][botao.dataset.posicao];
+  filme.marcado = !filme.marcado;
+  botao.textContent = filme.marcado ? 'Marcado' : 'Quero ver';
+  botao.closest('.cartao').classList.toggle('marcado', filme.marcado);
+});
+
+// ---------- EXPOSIÇÕES ----------
+
+// A lista vem de exposicoes.json, agrupada pelo local.
+// Cada exposição abre ao toque e mostra a imagem e a descrição.
+function desenharExposicoes(exposicoes) {
+  const locais = [...new Set(exposicoes.map(exposicao => exposicao.local_exposicao))];
+  document.getElementById('exposicoes').innerHTML = locais.map(local => `
+    <p class="versal">${local}</p>
+    <ul class="opcoes">
+      ${exposicoes.filter(exposicao => exposicao.local_exposicao === local).map(exposicao => `
+        <li><details class="cartao">
+          <summary>${exposicao.nome_exposicao}</summary>
+          <div class="dentro">
+            ${exposicao.imagem ? `<img class="larga" src="${exposicao.imagem}" alt="" loading="lazy">` : ''}
+            <p>${exposicao.descricao_exposicao}</p>
+          </div>
+        </details></li>`).join('')}
+    </ul>`).join('<div class="linha"></div>');
+}
+
+// ---------- CAFETERIAS, BARES E RESTAURANTES ----------
+
+// As três listas vêm de lugares.json. Cada lugar tem nome e, quando houver,
+// categoria (agrupa a lista), detalhe (endereço ou observação) e link (Instagram).
+function desenharLugares(lista, lugares) {
+  const categorias = [...new Set(lugares.map(lugar => lugar.categoria || ''))];
+  document.getElementById(lista).innerHTML = categorias.map(categoria => `
+    ${categoria ? `<p class="versal">${categoria}</p>` : ''}
+    <ul class="plano">
+      ${lugares.filter(lugar => (lugar.categoria || '') === categoria).map(lugar => `
+        <li>
+          <strong>${lugar.nome}</strong>
+          ${lugar.detalhe ? `<span class="italico">${lugar.detalhe}</span>` : ''}
+          ${lugar.link ? `<a class="versal atalho" href="${lugar.link}" target="_blank" rel="noopener">Ver no Instagram</a>` : ''}
+        </li>`).join('')}
+    </ul>`).join('<div class="linha"></div>');
+}
+
+// Restaurantes: ordenação e filtro por tipo de cozinha (pode marcar vários).
+let RESTAURANTES = [];
+const cozinhas = new Set();   // tipos de cozinha marcados
+
+function desenharRestaurantes() {
+  const ordem = document.getElementById('ordem-restaurantes').value;
+  let visiveis = RESTAURANTES.filter(lugar => !cozinhas.size || cozinhas.has(lugar.categoria));
+
+  // Ordenado por nome, a lista fica corrida e o tipo de cozinha aparece junto do nome.
+  if (ordem !== 'cozinha') {
+    visiveis = visiveis
+      .map(lugar => ({ ...lugar, categoria: '', detalhe: [lugar.categoria, lugar.detalhe].filter(Boolean).join(', ') }))
+      .sort((a, b) => a.nome.localeCompare(b.nome, 'pt') * (ordem === 'az' ? 1 : -1));
+  }
+
+  document.getElementById('resumo-cozinha').textContent = 'Tipo de cozinha' + (cozinhas.size ? ` (${cozinhas.size})` : '');
+  document.getElementById('contagem-restaurantes').textContent = visiveis.length + (visiveis.length === 1 ? ' restaurante' : ' restaurantes');
+  desenharLugares('restaurantes', visiveis);
+}
+
+document.getElementById('ordem-restaurantes').addEventListener('change', desenharRestaurantes);
+
+document.getElementById('fichas-cozinha').addEventListener('click', evento => {
+  const ficha = evento.target.closest('.ficha');
+  if (!ficha) return;
+  const marcar = !cozinhas.has(ficha.dataset.cozinha);
+  if (marcar) cozinhas.add(ficha.dataset.cozinha); else cozinhas.delete(ficha.dataset.cozinha);
+  ficha.setAttribute('aria-pressed', marcar);
+  desenharRestaurantes();
+});
+
+// ---------- CARREGAMENTO DOS DADOS ----------
+
+fetch('lugares.json').then(resposta => resposta.json()).then(lugares => {
+  desenharLugares('cafeterias', lugares.cafeterias);
+  desenharLugares('bares', lugares.bares);
+
+  RESTAURANTES = lugares.restaurantes;
+  const tipos = [...new Set(RESTAURANTES.map(lugar => lugar.categoria))];
+  document.getElementById('fichas-cozinha').innerHTML = tipos.map(tipo =>
+    `<button class="ficha" data-cozinha="${tipo}" aria-pressed="false">${tipo}</button>`).join('');
+  desenharRestaurantes();
+}).catch(() => {
+  ['cafeterias', 'bares', 'restaurantes'].forEach(lista => {
+    document.getElementById(lista).innerHTML = '<p>Não foi possível carregar esta lista.</p>';
+  });
+});
+
+fetch('filmes.json').then(resposta => resposta.json()).then(filmes => {
+  LISTAS.filmes = filmes;
+  preencherFiltros();
+  desenharFilmes();
+}).catch(() => {
+  document.getElementById('contagem').textContent = 'Não foi possível carregar a lista de filmes.';
+});
+
+fetch('cartaz.json').then(resposta => resposta.json()).then(filmes => {
+  LISTAS.cartaz = filmes;
+  document.getElementById('cartaz').innerHTML = filmes.map(filme => cartaoDeFilme('cartaz', filme)).join('');
+}).catch(() => {
+  document.getElementById('cartaz').innerHTML = '<li>Não foi possível carregar os filmes em cartaz.</li>';
+});
+
+fetch('exposicoes.json').then(resposta => resposta.json()).then(desenharExposicoes).catch(() => {
+  document.getElementById('exposicoes').innerHTML = '<p>Não foi possível carregar as exposições.</p>';
+});
+
+// ---------- INÍCIO ----------
+
+desenharRoteiro();
+mostrarTela('inicio');
+</script>
 </body>
 </html>

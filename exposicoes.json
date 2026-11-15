@@ -1,0 +1,116 @@
+[
+  {
+    "nome_exposicao": "Rosa Elena Curruchich: crônicas de Comalapa",
+    "local_exposicao": "MASP",
+    "descricao_exposicao": "Retrospectiva com mais de 80 pinturas de pequeno formato da artista guatemalteca Rosa Elena Curruchich, de origem maia kaqchikel. As cenas mostram o dia a dia e as cerimônias de Comalapa, com destaque para os huipiles, as roupas femininas feitas à mão. O tamanho reduzido das telas vem do fato de ela ter pintado às escondidas.",
+    "imagem": "exposicoes-web/masp-rosa-elena-curruchich.jpg"
+  },
+  {
+    "nome_exposicao": "Pablo Delano: O museu da antiga colônia",
+    "local_exposicao": "MASP",
+    "descricao_exposicao": "Uma grande instalação do artista porto-riquenho Pablo Delano, montada com objetos, fotografias, jornais, revistas e filmes. O conjunto percorre a história de Porto Rico sob domínio espanhol e depois norte-americano, e o que isso significou para indígenas e afrodescendentes da ilha. O formato de \"museu\" é usado com ironia para questionar a ligação entre museus e colonialismo.",
+    "imagem": "exposicoes-web/masp-pablo-delano.jpg"
+  },
+  {
+    "nome_exposicao": "Sala de vídeo: Edgar Calel",
+    "local_exposicao": "MASP",
+    "descricao_exposicao": "Projeções do artista guatemalteco Edgar Calel, do povo maia kaqchikel, ocupam as três paredes da Sala de Vídeo. No centro fica um vídeo inédito, feito por encomenda do museu com imagens de arquivo da Guatemala e do Brasil, que trata o fogo como um saber passado entre gerações. Nas laterais aparecem a floresta e um jaguar diante de uma fogueira.",
+    "imagem": "exposicoes-web/masp-sala-de-video-edgar-calel.jpg"
+  },
+  {
+    "nome_exposicao": "Histórias latino-americanas",
+    "local_exposicao": "MASP",
+    "descricao_exposicao": "São 187 obras de 148 artistas de 20 países, distribuídas pelos cinco andares do Edifício Pietro. A montagem é por temas, não por país ou época, e coloca peças pré-coloniais ao lado de arte contemporânea, mapas, pinturas, fotografias e vídeos. Os núcleos vão da invasão europeia ao pensamento indígena atual, passando por modernização, vida coletiva e migrações.",
+    "imagem": "exposicoes-web/masp-historias-latino-americanas.jpg"
+  },
+  {
+    "nome_exposicao": "Sol Calero: Casa María Lionza",
+    "local_exposicao": "MASP",
+    "descricao_exposicao": "Um pavilhão construído no Vão Livre do museu, com ambientes inspirados na arquitetura popular latino-americana. As fachadas e paredes são coloridas, cobertas de padrões pintados à mão e mosaicos, como uma pintura em que se pode entrar. O nome vem de María Lionza, divindade venezuelana, e a ideia é a de uma casa acolhedora.",
+    "imagem": "exposicoes-web/masp-sol-calero.jpg"
+  },
+  {
+    "nome_exposicao": "Acervo em transformação",
+    "local_exposicao": "MASP",
+    "descricao_exposicao": "A coleção do MASP exposta nos cavaletes de cristal de Lina Bo Bardi, em fileiras sem paredes, numa grande sala do segundo andar. Dá para andar livremente entre as obras, e as legendas ficam atrás de cada cavalete, de modo que se vê a obra antes de saber de quem é. A seleção muda com frequência e inclui fileiras dedicadas a artistas negros e a artistas mulheres.",
+    "imagem": "exposicoes-web/masp-acervo-em-transformacao.jpg"
+  },
+  {
+    "nome_exposicao": "Caleidoscópio Xapiri Yanomami",
+    "local_exposicao": "MIS",
+    "descricao_exposicao": "Cerca de trinta fotografias de Leão Serva feitas em 2022 numa comunidade Yanomami, durante uma pajelança com trinta xamãs. As imagens foram feitas com celular, com longas exposições e sobreposições, o que fragmenta os corpos e multiplica os gestos e as danças. Não há uso de inteligência artificial nem de edição em Photoshop.",
+    "imagem": "exposicoes-web/mis-caleidoscopio-xapiri-yanomami.jpg"
+  },
+  {
+    "nome_exposicao": "Belezas brasileiras",
+    "local_exposicao": "MIS",
+    "descricao_exposicao": "Ensaios de quatro fotógrafos, todos feitos com celular, sobre paisagens e modos de vida do Brasil. Há a fauna e as texturas da Caatinga, a vegetação em meio à arquitetura de São Paulo, a vida na Serra da Mantiqueira e cenas coloridas do cotidiano. A entrada é gratuita.",
+    "imagem": "exposicoes-web/mis-belezas-brasileiras.jpg"
+  },
+  {
+    "nome_exposicao": "Marília Mendonça – Sentimento Louco",
+    "local_exposicao": "MIS",
+    "descricao_exposicao": "Mostra sobre a trajetória de Marília Mendonça, em cerca de 1.000 m² e dois andares, da infância e das primeiras composições até o sucesso nos palcos. Há objetos pessoais, figurinos, registros inéditos, instalações audiovisuais e partes interativas. Cada ambiente leva o nome de uma música da cantora.",
+    "imagem": "exposicoes-web/mis-marilia-mendonca.jpg"
+  },
+  {
+    "nome_exposicao": "Círio de Nazaré. Do sagrado ao profano: uma extensão do Brasil | Nova Fotografia 2026",
+    "local_exposicao": "MIS",
+    "descricao_exposicao": "Ensaio documental do fotógrafo Fabricio Augusto sobre o Círio de Nazaré, em Belém. As fotos mostram a devoção a Nossa Senhora de Nazaré e também quem sustenta a festa: os pagadores de promessa, a organização coletiva e os gestos de cuidado com a multidão, como a distribuição de água. A entrada é gratuita.",
+    "imagem": "exposicoes-web/mis-cirio-de-nazare.jpg"
+  },
+  {
+    "nome_exposicao": "Sara Ramo: a fúria dos restos vivos",
+    "local_exposicao": "Pinacoteca – Pina Estação",
+    "descricao_exposicao": "Cerca de 90 trabalhos de Sara Ramo, entre vídeos, pinturas, instalações, fotografias, objetos e colagens, feitos a partir de coisas quebradas, acumuladas ou descartadas. Uma das instalações é um ambiente escuro em que as formas aparecem aos poucos; outra é uma paisagem para percorrer, montada com equipamentos obsoletos e restos de exposições anteriores do museu. No caminho há ainda um corredor com pilhas de doces.",
+    "imagem": "exposicoes-web/pina-sara-ramo.jpg"
+  },
+  {
+    "nome_exposicao": "Beatriz Milhazes: gravuras do acervo da Pinacoteca de São Paulo",
+    "local_exposicao": "Pinacoteca – Pina Estação",
+    "descricao_exposicao": "Reúne 27 gravuras de Beatriz Milhazes produzidas entre 1996 e 2019, todas do acervo da Pinacoteca. São obras muito coloridas, com estampas florais, guirlandas, discos, mandalas e formas sinuosas. As referências passam por chita, bordado, tecelagem brasileira e grafismos indígenas.",
+    "imagem": "exposicoes-web/pina-beatriz-milhazes.jpg"
+  },
+  {
+    "nome_exposicao": "Ismael Nery: armadilha moderna",
+    "local_exposicao": "Pinacoteca – Pina Luz",
+    "descricao_exposicao": "Panorama com cerca de 230 obras de Ismael Nery (1900–1934), entre desenhos e pinturas. Predominam retratos, autorretratos e composições com figuras humanas, muitas delas andróginas e algumas ameaçadoras. A mostra percorre toda a trajetória do artista.",
+    "imagem": "exposicoes-web/pina-ismael-nery.jpg"
+  },
+  {
+    "nome_exposicao": "Luana Vitra: Bandeira Branca",
+    "local_exposicao": "Pinacoteca – Pina Luz",
+    "descricao_exposicao": "Uma instalação inédita de Luana Vitra feita para o Octógono, o espaço central do prédio. O trabalho parte das terras raras, elementos químicos usados na tecnologia atual, para falar de extrativismo e colonialismo. A artista costuma trabalhar com minerais e metais como ferro, cobre e chumbo.",
+    "imagem": "exposicoes-web/pina-luana-vitra.jpg"
+  },
+  {
+    "nome_exposicao": "Vídeos do acervo – Luiz Roque, Urubu",
+    "local_exposicao": "Pinacoteca – Pina Luz",
+    "descricao_exposicao": "A videoinstalação Urubu (2021), de Luiz Roque, exibida na Sala de Vídeo. O filme é em Super 8, sem som, gravado da janela do apartamento do artista no centro de São Paulo durante a pandemia. A câmera segue um urubu voando entre os prédios da cidade vazia.",
+    "imagem": "exposicoes-web/pina-luiz-roque-urubu.jpg"
+  },
+  {
+    "nome_exposicao": "Uma Obra: Pintura sem fim",
+    "local_exposicao": "Pinacoteca – Pina Luz",
+    "descricao_exposicao": "Uma instalação participativa do artista Gui Teixeira: uma grande parede de carpete com centenas de peças de feltro colorido que o público pode mover à vontade. Cada visitante monta figuras, paisagens ou composições abstratas, e a obra muda a cada intervenção. Foi pensada a partir da primeira infância, mas é aberta a todas as idades.",
+    "imagem": "exposicoes-web/pina-uma-obra-pintura-sem-fim.jpg"
+  },
+  {
+    "nome_exposicao": "Paulo Pedro Leal: trágico subúrbio",
+    "local_exposicao": "Pinacoteca – Pina Luz",
+    "descricao_exposicao": "Mais de 50 pinturas das décadas de 1950 e 1960 do pintor autodidata Paulo Pedro Leal, em três salas. A primeira traz naufrágios, batalhas navais, naturezas-mortas e paisagens do subúrbio avançando sobre o campo; a segunda, cenas de brigas de bar e de violência urbana no Rio de Janeiro. A terceira reúne obras de caráter erótico, festas e cenas de umbanda e candomblé.",
+    "imagem": "exposicoes-web/pina-paulo-pedro-leal.jpg"
+  },
+  {
+    "nome_exposicao": "Hyundai Translocal Series: Via Satélite – Diálogos com Nam June Paik – Charlotte Moorman e Vivian Caccuri",
+    "local_exposicao": "Pinacoteca – Pina Contemporânea",
+    "descricao_exposicao": "Obras de Nam June Paik ao lado de trabalhos da violoncelista e performer Charlotte Moorman e da artista brasileira Vivian Caccuri. Entre elas está TV Cello (1971), escultura feita de três televisores e cordas para ser tocada como um violoncelo, e uma instalação sonora inédita de Caccuri que transforma o fluxo sanguíneo em som. É uma mostra audiovisual, com trechos de luz baixa.",
+    "imagem": "exposicoes-web/pina-via-satelite.jpg"
+  },
+  {
+    "nome_exposicao": "Nós, Jovens",
+    "local_exposicao": "Pinacoteca – Pina Contemporânea",
+    "descricao_exposicao": "Reproduções de vinte obras criadas em oficinas por adolescentes em medida socioeducativa em São Paulo e por jovens de uma instituição de custódia na Inglaterra. Os trabalhos partem das músicas favoritas de cada um e combinam serigrafia, colagem e outras técnicas gráficas. Textos escritos pelos próprios jovens acompanham as imagens.",
+    "imagem": "exposicoes-web/pina-nos-jovens.jpg"
+  }
+]

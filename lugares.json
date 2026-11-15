@@ -1,0 +1,308 @@
+{
+  "cafeterias": [
+    {
+      "nome": "Teto Café",
+      "detalhe": "R. Simão Álvares, 986, Loja 01, Vila Madalena, São Paulo/SP, 05417-020"
+    },
+    {
+      "nome": "Mef's Café & Brunch",
+      "detalhe": "R. Inácio Pereira da Rocha, 248, Pinheiros, São Paulo/SP, 05432-010"
+    },
+    {
+      "nome": "Coffee Lab (unidade original)",
+      "detalhe": "R. Aspicuelta, 227, Vila Madalena, São Paulo/SP, 05433-010"
+    },
+    {
+      "nome": "Coffee Lab 2",
+      "detalhe": "R. Fernão Dias, 682, Pinheiros, São Paulo/SP, 05427-001"
+    },
+    {
+      "nome": "Cupping Café",
+      "detalhe": "R. Wisard, 171, Vila Madalena, São Paulo/SP, 05434-080"
+    },
+    {
+      "nome": "Botanikafé Pinheiros",
+      "detalhe": "R. Padre Garcia Velho, 56, Pinheiros, São Paulo/SP, 05421-030"
+    }
+  ],
+  "bares": [
+    {
+      "categoria": "",
+      "nome": "Flora Bar",
+      "detalhe": "",
+      "link": "https://www.instagram.com/florabar.sp/"
+    },
+    {
+      "categoria": "",
+      "nome": "Eximia Bar",
+      "detalhe": "",
+      "link": "https://www.instagram.com/eximiabar/"
+    },
+    {
+      "categoria": "",
+      "nome": "Guarita Bar",
+      "detalhe": "",
+      "link": "https://www.instagram.com/guaritabar/"
+    },
+    {
+      "categoria": "",
+      "nome": "Sala Bar",
+      "detalhe": "",
+      "link": "https://www.instagram.com/salabarsp/"
+    },
+    {
+      "categoria": "",
+      "nome": "Bar do Cofre",
+      "detalhe": "",
+      "link": "https://www.instagram.com/obardocofre/"
+    },
+    {
+      "categoria": "",
+      "nome": "Bar dos Arcos",
+      "detalhe": "",
+      "link": "https://www.instagram.com/bardosarcos/"
+    },
+    {
+      "categoria": "",
+      "nome": "Santana Bar",
+      "detalhe": "",
+      "link": "https://www.instagram.com/_santanabar/"
+    }
+  ],
+  "restaurantes": [
+    {
+      "categoria": "Japonês",
+      "nome": "OGURU Sushi",
+      "detalhe": "rodizio",
+      "link": "https://www.instagram.com/ogurusushibar/"
+    },
+    {
+      "categoria": "Japonês",
+      "nome": "Mori Ohta",
+      "detalhe": "rodizio no balcão",
+      "link": "https://www.instagram.com/moriohtasushi/"
+    },
+    {
+      "categoria": "Japonês",
+      "nome": "Sushi Nami",
+      "detalhe": "rodizio",
+      "link": "https://www.instagram.com/sushinamisp/"
+    },
+    {
+      "categoria": "Japonês",
+      "nome": "Kuromoon",
+      "detalhe": "coreano/japonês",
+      "link": "https://www.instagram.com/kuromoon.br/"
+    },
+    {
+      "categoria": "Japonês",
+      "nome": "Akkan",
+      "detalhe": "",
+      "link": "https://www.instagram.com/akkan_oficial/"
+    },
+    {
+      "categoria": "Japonês",
+      "nome": "Maza",
+      "detalhe": "",
+      "link": "https://www.instagram.com/mazarestaurant/"
+    },
+    {
+      "categoria": "Japonês",
+      "nome": "Kosushi",
+      "detalhe": "",
+      "link": "https://www.instagram.com/kosushi/"
+    },
+    {
+      "categoria": "Japonês",
+      "nome": "Su",
+      "detalhe": "",
+      "link": "https://www.instagram.com/restaurante.su/"
+    },
+    {
+      "categoria": "Japonês",
+      "nome": "Makoto",
+      "detalhe": "",
+      "link": "https://www.instagram.com/makoto_okuwa/"
+    },
+    {
+      "categoria": "Japonês",
+      "nome": "Goya Zushi",
+      "detalhe": "",
+      "link": "https://www.instagram.com/goyazushi/"
+    },
+    {
+      "categoria": "Japonês",
+      "nome": "Sushi Vaz",
+      "detalhe": "",
+      "link": "https://www.instagram.com/sushi_vaz/"
+    },
+    {
+      "categoria": "Italiano",
+      "nome": "Tappo Trattoria",
+      "detalhe": "",
+      "link": "https://www.instagram.com/tappotrattoria/"
+    },
+    {
+      "categoria": "Italiano",
+      "nome": "Supra di Mauro Maia",
+      "detalhe": "",
+      "link": "https://www.instagram.com/supradimauromaia/"
+    },
+    {
+      "categoria": "Italiano",
+      "nome": "Ristorantino",
+      "detalhe": "",
+      "link": "https://www.instagram.com/ristorantino_/"
+    },
+    {
+      "categoria": "Italiano",
+      "nome": "Lido Amici di Amici",
+      "detalhe": "",
+      "link": "https://www.instagram.com/lido_amici_di_amici/"
+    },
+    {
+      "categoria": "Italiano",
+      "nome": "Daje Roma",
+      "detalhe": "",
+      "link": "https://www.instagram.com/dajeroma_sp/"
+    },
+    {
+      "categoria": "Italiano",
+      "nome": "Il Capitale",
+      "detalhe": "",
+      "link": "https://www.instagram.com/ilcapitale/"
+    },
+    {
+      "categoria": "Italiano",
+      "nome": "Il Carpaccio",
+      "detalhe": "",
+      "link": "https://www.instagram.com/ilcarpacciorestaurante/"
+    },
+    {
+      "categoria": "Italiano",
+      "nome": "Piccini",
+      "detalhe": "",
+      "link": "https://www.instagram.com/piccinicucina/"
+    },
+    {
+      "categoria": "Italiano",
+      "nome": "Bottega Bernacca",
+      "detalhe": "",
+      "link": "https://www.instagram.com/bottegabernacca/"
+    },
+    {
+      "categoria": "Italiano",
+      "nome": "Bosco Restaurante",
+      "detalhe": "",
+      "link": "https://www.instagram.com/bosco.restaurante/"
+    },
+    {
+      "categoria": "Italiano",
+      "nome": "Zena Cucina",
+      "detalhe": "bib gourmand",
+      "link": "https://www.instagram.com/zenacucina/"
+    },
+    {
+      "categoria": "Italiano",
+      "nome": "Pappagallo Cucina",
+      "detalhe": "",
+      "link": "https://www.instagram.com/pappagallo.cucina/"
+    },
+    {
+      "categoria": "Pizza",
+      "nome": "Veridiana",
+      "detalhe": "",
+      "link": "https://www.instagram.com/veridianapizzaria/"
+    },
+    {
+      "categoria": "Pizza",
+      "nome": "Braz",
+      "detalhe": "",
+      "link": "https://www.instagram.com/brazpizzaria/"
+    },
+    {
+      "categoria": "Pizza",
+      "nome": "Braz Elettrica",
+      "detalhe": "",
+      "link": "https://www.instagram.com/brazelettrica/"
+    },
+    {
+      "categoria": "Pizza",
+      "nome": "Fôrno",
+      "detalhe": "",
+      "link": "https://www.instagram.com/forno_sp/"
+    },
+    {
+      "categoria": "Pizza",
+      "nome": "Carlos Pizza",
+      "detalhe": "",
+      "link": "https://www.instagram.com/carlospizza_sp/"
+    },
+    {
+      "categoria": "Pizza",
+      "nome": "Di Bari",
+      "detalhe": "",
+      "link": "https://www.instagram.com/dibaripizza/"
+    },
+    {
+      "categoria": "Pizza",
+      "nome": "Castelões",
+      "detalhe": "",
+      "link": "https://www.instagram.com/cantina_casteloes/"
+    },
+    {
+      "categoria": "Pizza",
+      "nome": "A Pizza da Mooca",
+      "detalhe": "",
+      "link": "https://www.instagram.com/apizzadamooca"
+    },
+    {
+      "categoria": "Árabe",
+      "nome": "Restaurante Capadócia",
+      "detalhe": "",
+      "link": "https://www.instagram.com/restaurantecapadocia/"
+    },
+    {
+      "categoria": "Árabe",
+      "nome": "Brasserie Victória",
+      "detalhe": "bib gourmand",
+      "link": "https://www.instagram.com/brasserie_victoria/"
+    },
+    {
+      "categoria": "Árabe",
+      "nome": "Syria",
+      "detalhe": "",
+      "link": "https://www.instagram.com/restaurantesyria/"
+    },
+    {
+      "categoria": "Hambúrgueres",
+      "nome": "Z Deli",
+      "detalhe": "",
+      "link": ""
+    },
+    {
+      "categoria": "Hambúrgueres",
+      "nome": "Z Deli Restaurante",
+      "detalhe": "",
+      "link": ""
+    },
+    {
+      "categoria": "Outros Asiáticos",
+      "nome": "Ping Yang",
+      "detalhe": "tailandês",
+      "link": "https://www.instagram.com/pingyangsp/"
+    },
+    {
+      "categoria": "Outros Asiáticos",
+      "nome": "Komah",
+      "detalhe": "coreano",
+      "link": "https://www.instagram.com/komahrestaurante/"
+    },
+    {
+      "categoria": "Outros Asiáticos",
+      "nome": "Song Qi",
+      "detalhe": "chinês",
+      "link": "https://www.instagram.com/songqi.sp/"
+    }
+  ]
+}
