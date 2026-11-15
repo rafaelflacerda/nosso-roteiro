@@ -295,7 +295,7 @@
 //   proxima: nome da próxima pergunta, ou null para encerrar e mostrar o roteiro
 //   plano:   itens que essa escolha acrescenta ao roteiro final
 //            (um item com link mostra um atalho para aquela lista; textoLink é o texto do atalho)
-const QUARTO = { quando: 'Agora', titulo: 'Vamos pro quarto um pouquinho 😏😏' };
+const QUARTO = { quando: 'Em casa', titulo: 'Vamos pro quarto um pouquinho 😏😏' };
 
 const QUALITY_TIME = [
   { texto: 'Assistir uma comédia romântica do jeito que você adora', plano: [{ quando: 'Quality time', titulo: 'Uma comédia romântica do jeito que você adora', detalhe: 'A gente escolhe na lista de filmes', link: '#filmes' }] },
@@ -304,12 +304,34 @@ const QUALITY_TIME = [
   { texto: 'Cozinhar alguma coisa diferente', plano: [{ quando: 'Quality time', titulo: 'Cozinhar alguma coisa diferente' }] }
 ];
 
+// A tela do lanche aparece em dois caminhos (estudar e um pouquinho dos dois).
+const LANCHE = {
+  titulo: 'Primeiro, um lanche delicioso',
+  mensagem: 'Um café com leite do jeito que você gosta e um avotoast delicioso.'
+};
+
+// As cinco respostas da tela do lanche. "proxima" é a tela seguinte e "estudo" é o
+// item de estudo do roteiro final. Um item com porUltimo: true vai para o fim do roteiro.
+function opcoesDoLanche(proxima, estudo) {
+  const lanche = detalhe => ({ quando: 'Primeiro', titulo: 'Um lanche em casa', detalhe });
+  // sem lanche, o estudo é a primeira coisa do roteiro (a não ser que ele vá para o fim)
+  const semLanche = estudo.porUltimo ? estudo : { ...estudo, quando: 'Primeiro' };
+  return [
+    { texto: 'Quero, os dois', proxima, plano: [lanche('Um café com leite do jeito que você gosta e um avotoast delicioso'), estudo] },
+    { texto: 'Quero, só o café', proxima, plano: [lanche('Um café com leite do jeito que você gosta'), estudo] },
+    { texto: 'Quero, só o avotoast', proxima, plano: [lanche('Um avotoast delicioso'), estudo] },
+    { texto: 'Quero, alguma outra coisa', proxima, plano: [lanche('Alguma outra coisa'), estudo] },
+    { texto: 'Agora não', proxima, plano: [semLanche] }
+  ];
+}
+
 const PERGUNTAS = {
   inicio: {
     titulo: 'Quer ficar de bobeira ou quer estudar?',
     opcoes: [
       { texto: 'Ficar de bobeira', proxima: 'bobeira', plano: [] },
-      { texto: 'Estudar', proxima: 'lanche', plano: [] }
+      { texto: 'Estudar', proxima: 'lanche', plano: [] },
+      { texto: 'Um pouquinho dos dois', proxima: 'lancheDosDois', plano: [] }
     ]
   },
 
@@ -344,23 +366,22 @@ const PERGUNTAS = {
   },
   sair: {
     titulo: 'O que você quer fazer?',
+    multipla: true,
+    proxima: null,
     opcoes: [
-      { texto: 'Ir a uma exposição de arte (tenho indicações)', proxima: null, plano: [{ quando: 'Agora', titulo: 'Uma exposição de arte', detalhe: 'Tenho indicações', link: '#exposicoes', textoLink: 'Ver as exposições' }] },
-      { texto: 'Ir ao cinema', proxima: null, plano: [{ quando: 'Agora', titulo: 'Cinema', link: '#cartaz', textoLink: 'Ver os filmes em cartaz' }] },
-      { texto: 'Tomar um café', proxima: null, plano: [{ quando: 'Agora', titulo: 'Um café', link: '#cafeterias', textoLink: 'Ver as cafeterias' }] },
-      { texto: 'Sair para um barzinho', proxima: null, plano: [{ quando: 'Agora', titulo: 'Um barzinho', link: '#bares', textoLink: 'Ver os bares' }] },
-      { texto: 'Sair para um restaurante', proxima: null, plano: [{ quando: 'Agora', titulo: 'Um restaurante', link: '#restaurantes', textoLink: 'Ver os restaurantes' }] }
+      { texto: 'Ir a uma exposição de arte (tenho indicações)', proxima: null, plano: [{ quando: 'Passeio', titulo: 'Uma exposição de arte', detalhe: 'Tenho indicações', link: '#exposicoes', textoLink: 'Ver as exposições' }] },
+      { texto: 'Ir ao cinema', proxima: null, plano: [{ quando: 'Passeio', titulo: 'Cinema', link: '#cartaz', textoLink: 'Ver os filmes em cartaz' }] },
+      { texto: 'Tomar um café', proxima: null, plano: [{ quando: 'Passeio', titulo: 'Um café', link: '#cafeterias', textoLink: 'Ver as cafeterias' }] },
+      { texto: 'Sair para um barzinho', proxima: null, plano: [{ quando: 'Passeio', titulo: 'Um barzinho', link: '#bares', textoLink: 'Ver os bares' }] },
+      { texto: 'Sair para um restaurante', proxima: null, plano: [{ quando: 'Passeio', titulo: 'Um restaurante', link: '#restaurantes', textoLink: 'Ver os restaurantes' }] }
     ]
   },
 
   // ----- caminho: estudar -----
-  lanche: {
-    titulo: 'Primeiro, um lanche delicioso',
-    mensagem: 'Café com leite do jeito que você gosta e mini sanduíches, como avotoast.',
-    opcoes: [
-      { texto: 'Quero', proxima: 'jantar', plano: [{ quando: 'Primeiro', titulo: 'Um lanche em casa', detalhe: 'Café com leite do jeito que você gosta e mini sanduíches' }, { quando: 'Depois', titulo: 'Estudar' }] }
-    ]
-  },
+  lanche: { ...LANCHE, opcoes: opcoesDoLanche('jantar', { quando: 'Depois', titulo: 'Estudar' }) },
+  // "Um pouquinho dos dois": o mesmo lanche e as telas de quem escolhe bobeira;
+  // no roteiro final, a bobeira vem antes e o estudo fica por último
+  lancheDosDois: { ...LANCHE, opcoes: opcoesDoLanche('bobeira', { quando: 'Depois', titulo: 'Estudar um pouquinho', porUltimo: true }) },
   jantar: {
     titulo: 'Quer jantar mais tarde?',
     opcoes: [
@@ -421,7 +442,8 @@ function desenharRoteiro() {
   const area = document.getElementById('roteiro');
 
   if (terminou) {
-    const itens = caminho.flatMap(escolha => escolha.plano);
+    const itens = caminho.flatMap(escolha => escolha.plano)
+      .sort((a, b) => (a.porUltimo ? 1 : 0) - (b.porUltimo ? 1 : 0));   // os "porUltimo" vão para o fim
     area.innerHTML = `
       <h1>Nosso roteiro</h1>
       <div class="linha"></div>
